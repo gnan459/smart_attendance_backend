@@ -80,41 +80,4 @@ async def verify_biometric(
         "final_status": attendance_record.final_status
     }
 
-@router.get("/attendance", response_model=List[session_schemas.AttendanceStatus])
-async def get_student_attendance(
-    db: Session = Depends(get_db),
-    current_student: models.User = Depends(get_current_student)
-):
-    records = db.query(models.AttendanceRecord).filter(
-        models.AttendanceRecord.student_id == current_student.id
-    ).all()
-    
-    results = []
-    for record in records:
-        session = db.query(models.ClassSession).filter(
-            models.ClassSession.id == record.session_id
-        ).first()
-        
-        if not session:
-            continue
-            
-        teacher = crud.get_user(db, session.teacher_id)
-        
-        # Count token submissions
-        token_count = db.query(models.TokenSubmission).filter(
-            models.TokenSubmission.attendance_record_id == record.id
-        ).count()
-        
-        results.append(
-            session_schemas.AttendanceStatus(
-                student_id=current_student.id,
-                student_name=current_student.full_name,
-                check_in_time=record.check_in_time,
-                check_out_time=record.check_out_time,
-                biometric_verified=record.biometric_verified,
-                final_status=record.final_status,
-                token_count=token_count
-            )
-        )
-    
-    return results
+

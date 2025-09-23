@@ -8,7 +8,11 @@ A FastAPI backend for a Smart Attendance System using BLE tokens and biometric v
 - **Biometric Verification**: Attendance validation through biometric data
 - **Automatic Token Rotation**: Tokens change every 5 minutes to prevent cheating
 - **Teacher and Student Interfaces**: Separate APIs for different user roles
-- **Attendance Reporting**: Comprehensive attendance tracking and status updates
+
+- **Analytics & Insights**: Teacher dashboards for:
+   - Student attendance percentage (monthly/semester)
+   - Daily class present/absent counts
+   - Attendance trends over time (visualization-ready)
 
 ## Installation
 
@@ -48,13 +52,15 @@ The API will be available at http://localhost:8000 and the documentation at http
 - `POST /api/v1/teacher/session/start` - Start a new class session
 - `POST /api/v1/teacher/session/{session_id}/end` - End a class session
 - `GET /api/v1/teacher/session/{session_id}/token` - Get current BLE token for advertising
-- `GET /api/v1/teacher/sessions` - Get all sessions for a teacher
-- `GET /api/v1/teacher/session/{session_id}/attendance` - Get attendance for a session
+- `GET /api/v1/teacher/analytics/attendance_percentage` - Get each student’s attendance percentage for the current month/semester
+- `GET /api/v1/teacher/analytics/daily_class_report` - Get total present vs absent count per class for a given day
+- `GET /api/v1/teacher/analytics/attendance_trends` - Get attendance trends over time (daily counts for charting)
+
 
 ### Student Endpoints
 - `POST /api/v1/student/token/submit` - Submit a captured BLE token
 - `POST /api/v1/student/biometric/verify` - Submit biometric data for verification
-- `GET /api/v1/student/attendance` - Get student's attendance history
+
 
 ## Workflow
 
