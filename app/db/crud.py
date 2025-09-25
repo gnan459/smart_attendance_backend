@@ -182,9 +182,8 @@ def verify_biometric_and_finalize(db: Session, student_id: int, session_id: str,
     attendance_record.biometric_verified = is_verified
     attendance_record.check_out_time = datetime.utcnow()
     
-    # Update final status if session has ended
-    if not session.is_active:
-        _update_attendance_status(db, attendance_record)
+    # Always update final status after biometric verification
+    _update_attendance_status(db, attendance_record)
     
     db.commit()
     db.refresh(attendance_record)

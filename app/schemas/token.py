@@ -18,7 +18,7 @@ class BLETokenResponse(BaseModel):
     expires_at: datetime
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class BLETokenSubmission(BaseModel):
     session_id: str

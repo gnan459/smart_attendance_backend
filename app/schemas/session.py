@@ -17,7 +17,7 @@ class SessionResponse(SessionBase):
     is_active: bool
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class AttendanceStatus(BaseModel):
     student_id: int
@@ -29,4 +29,4 @@ class AttendanceStatus(BaseModel):
     token_count: Optional[int] = None
     
     class Config:
-        orm_mode = True
+        from_attributes = True

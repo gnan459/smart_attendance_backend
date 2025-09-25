@@ -1,0 +1,32 @@
+2025-09-25 10:57:53,088 - db_operations - INFO - Creating new user with email: user@example.com
+2025-09-25 10:57:53,088 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Smart_Attendance\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-09-25 10:57:53,640 - db_operations - INFO - User created successfully: ID=1, Email=user@example.com
+2025-09-25 11:07:47,132 - db_operations - INFO - Creating new class session: Teacher ID=1, Course=ML-Class
+2025-09-25 11:07:47,245 - db_operations - INFO - Class session created: ID=1, Session ID=d607f0d8-d737-4a32-bd11-7b66f7c9474b
+2025-09-25 11:16:51,373 - db_operations - INFO - Creating new user with email: student1@example.com
+2025-09-25 11:16:51,373 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Smart_Attendance\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-09-25 11:16:52,130 - db_operations - INFO - User created successfully: ID=2, Email=student1@example.com
+2025-09-25 11:36:50,635 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Smart_Attendance\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-09-25 11:48:18,866 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "D:\Smart_Attendance\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-09-25 11:48:49,007 - db_operations - INFO - Ending class session: Session ID=d607f0d8-d737-4a32-bd11-7b66f7c9474b
+2025-09-25 11:48:49,205 - db_operations - INFO - Class session ended: ID=1, Session ID=d607f0d8-d737-4a32-bd11-7b66f7c9474b

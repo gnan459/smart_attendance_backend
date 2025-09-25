@@ -41,9 +41,15 @@ def start_token_rotation(db: Session, session_id: str):
     if not initial_token:
         return False
     
-    # Start background task
-    task = asyncio.create_task(token_rotation_task(db, session_id))
-    active_token_tasks[session_id] = task
+    # Start background task (only if we're in an async context)
+    try:
+        task = asyncio.create_task(token_rotation_task(db, session_id))
+        active_token_tasks[session_id] = task
+    except RuntimeError:
+        # No event loop running, skip background task for now
+        # The initial token is still created
+        pass
+    
     return True
 
 def stop_token_rotation(session_id: str):

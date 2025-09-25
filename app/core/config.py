@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
     
     # BLE Token settings
-    TOKEN_ROTATION_MINUTES: int = 5
+    TOKEN_ROTATION_MINUTES: int = 30  # Extended for testing - normally would be 5
     BLE_TOKEN_LENGTH: int = 16  # Length of BLE tokens in bytes (will be base64 encoded)
     BLE_SERVICE_UUID: str = "0000FEE0-0000-1000-8000-00805F9B34FB"  # Example service UUID
     

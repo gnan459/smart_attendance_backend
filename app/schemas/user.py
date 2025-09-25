@@ -15,4 +15,4 @@ class User(UserBase):
     is_teacher: bool
     
     class Config:
-        orm_mode = True
+        from_attributes = True

@@ -10,6 +10,15 @@ from app.services import ble_service
 from datetime import datetime, timedelta
 
 router = APIRouter(prefix="/teacher", tags=["teacher"])
+
+async def get_current_teacher(current_user: models.User = Depends(get_current_user)):
+    if not current_user.is_teacher:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Not a teacher account",
+        )
+    return current_user
+
 @router.get("/analytics/attendance_percentage", response_model=List[Dict[str, Any]])
 async def get_attendance_percentage(
     db: Session = Depends(get_db),
@@ -107,14 +116,6 @@ async def get_attendance_trends(
         results.append({"date": day, "present": trends[day]["present"], "absent": trends[day]["absent"]})
     return results
 
-async def get_current_teacher(current_user: models.User = Depends(get_current_user)):
-    if not current_user.is_teacher:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not a teacher account",
-        )
-    return current_user
-
 @router.post("/session/start", response_model=session_schemas.SessionResponse)
 async def start_class_session(
     session: session_schemas.SessionCreate,
@@ -175,8 +176,12 @@ async def get_current_token(
     # Get active token
     active_token = crud.get_active_ble_token(db, session_id)
     
-    if not active_token:
-        # Generate a new token if no active token exists
+    # Check if token exists and is not expired
+    from datetime import datetime
+    current_time = datetime.utcnow()
+    
+    if not active_token or (active_token.expires_at and active_token.expires_at <= current_time):
+        # Generate a new token if no active token exists or if it's expired
         active_token = ble_service.generate_ble_token(db, session_id)
         if not active_token:
             raise HTTPException(status_code=400, detail="Failed to generate token")
